@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/all.min.css" rel="stylesheet">
+   <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+      text-align: right;
+          }
+        .navbar {
+            background-color: #007bff; /* Custom blue color for the banner */
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+        .logoBIG {
+            width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+	
+	
+	 <!-- Banner -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img th:src="@{fotos/logo.png}" alt="Logo" class="logo" >   
+     <a class="navbar-brand mx-auto" href="/">  المصلحة الوطنية لخفر السواحل</a>  
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+               
+                 
+                
+               <li class="nav-item">
+    <a class="nav-link text-danger" href="/logout">
+       خروج <i class="fas fa-sign-out-alt"></i> 
+    </a>  
+</li>
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+<div class="container mt-4">
+    <h2 class="text-center">إدارة المستخدم  </h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>اسم المستخدم</th>
+            <th>الصفة</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.role}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/users/add" class="btn btn-primary">اضافة مستخدم    </a>
+</div>
+</body>
+</html>

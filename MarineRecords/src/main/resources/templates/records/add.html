@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>    إضافة محضر بحري</title>
+   <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+        }
+        .navbar {
+            background-color: #007bff; /* Custom blue color for the banner */
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+        .logoBIG {
+            width: 400px;
+            height: auto;
+        }
+    </style>
+    </head>
+<body>
+	
+	  <!-- Banner -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img th:src="@{fotos/logo.png}" alt="Logo" class="logo" >   
+     <a class="navbar-brand mx-auto" href="/">  المصلحة الوطنية لخفر السواحل</a>  
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+               
+                 
+                 <li class="nav-item" >
+                    <a class="nav-link" th:href="@{/users}" th:if="${userRole == 'admin'}">قائمة المستخدمبن</a> <!-- Users link, visible only to admin -->
+                </li>
+               <li class="nav-item">
+    <a class="nav-link text-danger" href="/logout">
+       خروج <i class="fas fa-sign-out-alt"></i> 
+    </a>  
+</li>
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+<div class="container">
+    <h2 class="text-center">     إضافة محضر بحري</h2>
+    <form th:action="@{/records}" th:object="${record}" method="post">
+        <div class="form-group">
+            <label for="date">التاريخ</label>
+            <input type="date" class="form-control" id="date" th:field="*{date}" required>
+        </div>
+        <div class="form-group">
+            <label for="time">الوقت</label>
+            <input type="time" class="form-control" id="time" th:field="*{time}" required>
+        </div>
+        <div class="form-group">
+            <label for="boatName">اسم القارب  </label>
+            <input type="text" class="form-control" id="boatName" th:field="*{boatName}" required>
+        </div>
+        <div class="form-group">
+            <label for="boatIMO">  IMO</label>
+            <input type="text" class="form-control" id="boatIMO" th:field="*{boatIMO}" required>
+        </div>
+       
+        <div class="form-group">
+            <label for="sourcePort">ميناء  القيد  </label>
+            
+             <select id="sourcePort" name="sourcePort" th:field="*{sourcePort}" class="form-control" required>
+                <option value="حلق الوادي" th:selected="${record.sourcePort == 'حلق الوادي'}">حلق الوادي</option>
+              <option value="بنزرت" th:selected="${record.sourcePort == 'بنزرت'}">بنزرت</option>  
+              
+                
+            </select>
+        </div>
+        <!--<div class="form-group">
+            <label for="sourcePort">Source Port</label>
+            <input type="text" class="form-control" id="sourcePort" th:field="*{sourcePort}" required>
+        </div>-->
+        
+        
+        
+        <div class="form-group">
+            <label for="corpPenalty">الهيكل المصدر للمخالفة  </label>
+            <input type="text" class="form-control" id="corpPenalty" th:field="*{corpPenalty}" required>
+        </div>
+        <div class="form-group">
+            <label for="boatCommander">قائد المركب  </label>
+            <input type="text" class="form-control" id="boatCommander" th:field="*{boatCommander}" required>
+        </div>
+        <div class="form-group">
+            <label for="penaltyType"> نوع المخالفة  </label>
+            <input type="text" class="form-control" id="penaltyType" th:field="*{penaltyType}" required>
+        </div>
+        <div class="form-group">
+            <label for="legislativeReference">المرجع القانوني  </label>
+            <input type="text" class="form-control" id="legislativeReference" th:field="*{legislativeReference}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ</button>
+    </form>
+      <div class="form-group">
+            <label></label>
+           
+        </div>
+      <a href="/records" class="btn btn-primary mx-2">عودة إلى القائمة</a>
+      <div class="form-group">
+            <label></label>
+           
+        </div>
+</div>
+</body>
+</html>

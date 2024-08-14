@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>عرض المحضر البحري</title>
+   <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+            text-align: right; /* Align text to the right for RTL */
+        }
+        .container {
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px; /* Adjust width as needed */
+        }
+        .record-detail {
+            margin-top: 20px;
+        }
+        .record-detail h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .record-detail .form-group {
+            margin-bottom: 1rem;
+        }
+        .record-detail .form-group label {
+            font-weight: bold;
+        }
+        .btn-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="/path/to/logo.png" alt="Logo" class="logo">    
+
+    <div class="record-detail">
+        <h3>تفاصيل المحضر البحري</h3>
+        <div class="form-group">
+            <label>ID:</label>
+            <p th:text="${record.id}"></p>
+        </div>
+        <div class="form-group">
+            <label>تاريخ:</label>
+            <p th:text="${record.date}"></p>
+        </div>
+        <div class="form-group">
+            <label>وقت:</label>
+            <p th:text="${record.time}"></p>
+        </div>
+        <div class="form-group">
+            <label>اسم القارب:</label>
+            <p th:text="${record.boatName}"></p>
+        </div>
+        <div class="form-group">
+            <label>IMO القارب:</label>
+            <p th:text="${record.boatIMO}"></p>
+        </div>
+        <div class="form-group">
+            <label>ميناء المصدر:</label>
+            <p th:text="${record.sourcePort}"></p>
+        </div>
+        <div class="form-group">
+            <label>عقوبة الشركة:</label>
+            <p th:text="${record.corpPenalty}"></p>
+        </div>
+        <div class="form-group">
+            <label>قائد القارب:</label>
+            <p th:text="${record.boatCommander}"></p>
+        </div>
+        <div class="form-group">
+            <label>نوع العقوبة:</label>
+            <p th:text="${record.penaltyType}"></p>
+        </div>
+        <div class="form-group">
+            <label>المرجع التشريعي:</label>
+            <p th:text="${record.legislativeReference}"></p>
+        </div>
+        <div class="btn-group">
+            <a th:href="@{/records/edit/{id}(id=${record.id})}" class="btn btn-warning mx-2">تعديل</a>
+            <a th:href="@{/records/delete/{id}(id=${record.id})}" class="btn btn-danger mx-2">حذف</a>
+            <a href="/records" class="btn btn-primary mx-2">عودة إلى القائمة</a>
+        </div>
+    </div>
+     <div class="form-group">
+            <label></label>
+           
+        </div>
+</div>
+</body>
+</html>

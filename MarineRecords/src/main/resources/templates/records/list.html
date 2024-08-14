@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>المحاضر البحرية</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+        }
+        .navbar {
+            background-color: #007bff; /* Custom blue color for the banner */
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+        .logoBIG {
+            width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img th:src="@{fotos/logo.png}" alt="Logo" class="logo" >   
+     <a class="navbar-brand mx-auto" href="/">  المصلحة الوطنية لخفر السواحل</a>  
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+               
+                <li class="nav-item">
+                    <form class="form-inline" action="/record/query" method="get">
+                        <input class="form-control mr-sm-2" type="search" name="query" placeholder="بحث" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">بحث</button>
+                    </form> <!-- Search bar -->
+                </li>
+                 <li class="nav-item" >
+                    <a class="nav-link" th:href="@{/users}" th:if="${userRole == 'admin'}">قائمة المستخدمبن</a> <!-- Users link, visible only to admin -->
+                </li>
+               <li class="nav-item">
+    <a class="nav-link text-danger" href="/logout">
+       خروج <i class="fas fa-sign-out-alt"></i> 
+    </a>  
+</li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="text-center">المحاضر البحرية</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>معرف</th>
+                <th>تاريخ</th>
+                <th>وقت</th>
+                <th>اسم القارب</th>
+                <th>IMO القارب</th>
+                <th>ميناء المصدر</th>
+                <th>عقوبة الشركة</th>
+                <th>قائد القارب</th>
+                <th>نوع العقوبة</th>
+                <th>المرجع التشريعي</th>
+                <th>الإجراءات</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="record : ${records}">
+                <td th:text="${record.id}"></td>
+                <td th:text="${record.date}"></td>
+                <td th:text="${record.time}"></td>
+                <td th:text="${record.boatName}"></td>
+                <td th:text="${record.boatIMO}"></td>
+                <td th:text="${record.sourcePort}"></td>
+                <td th:text="${record.corpPenalty}"></td>
+                <td th:text="${record.boatCommander}"></td>
+                <td th:text="${record.penaltyType}"></td>
+                <td th:text="${record.legislativeReference}"></td>
+                <td class="d-flex justify-content-start">
+                    <a th:href="@{/records/{id}(id=${record.id})}" class="btn btn-info mx-2">عرض</a>
+                    <a th:href="@{/records/edit/{id}(id=${record.id})}" class="btn btn-warning mx-2">تعديل</a>
+                    <a th:href="@{/records/delete/{id}(id=${record.id})}" class="btn btn-danger mx-2">حذف</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/records/add" class="btn btn-primary">إضافة سجل جديد</a>
+    </div>
+
+    <!-- Logo at the bottom -->
+    <div style="text-align: center; margin-top: 20px;">
+        <img th:src="@{fotos/logo.png}" alt="logoBIG1" class="logoBIG1">
+    </div>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>المحاضر البحرية</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+        }
+    </style>
+</head>
+<body>
+	 
+  <div> <a href="/logout" class="btn btn-primary">    خروج</a></div>
+  <div> <a href="/users" class="btn btn-primary" th:if="${userRole == 'admin'}">    users</a></div>
+   <form class="form-inline" action="/record/query" method="get">
+    <input class="form-control mr-sm-2" type="search" name="query" placeholder="بحث  " aria-label="Search">
+  				  <button class="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">بحث</button>
+				</form>
+<div class="container">
+     <h2 class="text-center">المحاضر البحرية</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>معرف</th>
+            <th>تاريخ</th>
+            <th>وقت</th>
+            <th>اسم القارب</th>
+            <th>IMO القارب</th>
+            <th>ميناء المصدر</th>
+            <th>عقوبة الشركة</th>
+            <th>قائد القارب</th>
+            <th>نوع العقوبة</th>
+            <th>المرجع التشريعي</th>
+            <th>الإجراءات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="record : ${records}">
+            <td th:text="${record.id}"></td>
+            <td th:text="${record.date}"></td>
+            <td th:text="${record.time}"></td>
+            <td th:text="${record.boatName}"></td>
+            <td th:text="${record.boatIMO}"></td>
+            <td th:text="${record.sourcePort}"></td>
+            <td th:text="${record.corpPenalty}"></td>
+            <td th:text="${record.boatCommander}"></td>
+            <td th:text="${record.penaltyType}"></td>
+            <td th:text="${record.legislativeReference}"></td>
+            <td class="d-flex justify-content-start">
+                <a th:href="@{/records/{id}(id=${record.id})}" class="btn btn-info mx-2">عرض</a>
+                <a th:href="@{/records/edit/{id}(id=${record.id})}" class="btn btn-warning mx-2">تعديل</a>
+                <a th:href="@{/records/delete/{id}(id=${record.id})}" class="btn btn-danger mx-2">حذف</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/records/add" class="btn btn-primary">إضافة سجل جديد</a>
+</div>
+			<div style="text-align: center;">
+				<img th:src="@{fotos/logo.png}" alt="Logo" class="logo">
+			</div>
+</body>
+</html>
+ -->

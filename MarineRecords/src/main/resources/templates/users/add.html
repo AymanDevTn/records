@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+   <link href="/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/css/all.min.css" rel="stylesheet">
+  <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+      text-align: right;
+          }
+        .navbar {
+            background-color: #007bff; /* Custom blue color for the banner */
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+        .logoBIG {
+            width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+	
+	 <!-- Banner -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img th:src="@{fotos/logo.png}" alt="Logo" class="logo" >   
+     <a class="navbar-brand mx-auto" href="/">  المصلحة الوطنية لخفر السواحل</a>  
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+               
+                 
+                
+               <li class="nav-item">
+    <a class="nav-link text-danger" href="/logout">
+       خروج <i class="fas fa-sign-out-alt"></i> 
+    </a>  
+</li>
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+<div class="container mt-4">
+    <h2 class="text-center">إضافة مستخدم  </h2>
+    <form th:action="@{/users}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="username">اسم المستخدم</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">كلمة المرور</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="photoUrl">الصفة:</label>
+            
+             <select id="role" name="role" th:field="*{role}" class="form-control" required>
+                <option value="admin" th:selected="${user.role == 'admin'}">ADMIN</option>
+              <option value="user" th:selected="${user.role == 'user'}">USER</option>  
+              
+                
+            </select>
+        </div>
+        
+        
+        <button type="submit" class="btn btn-primary">حفظ</button>
+    </form>
+     <div class="form-group">
+            <label></label>
+           
+        </div>
+      <a href="/users" class="btn btn-primary mx-2">عودة إلى القائمة</a>
+</div>
+</body>
+</html>

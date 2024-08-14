@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Marine Record</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+<body>
+<div class="container">
+    <h2 class="text-center">View Marine Record</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <td th:text="${record.id}"></td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td th:text="${#dates.format(record.date, 'yyyy-MM-dd')}"></td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td th:text="${record.time}"></td>
+        </tr>
+        <tr>
+            <th>Boat Name</th>
+            <td th:text="${record.boatName}"></td>
+        </tr>
+        <tr>
+            <th>Boat IMO</th>
+            <td th:text="${record.boatIMO}"></td>
+        </tr>
+        <tr>
+            <th>Source Port</th>
+            <td th:text="${record.sourcePort}"></td>
+        </tr>
+        <tr>
+            <th>Corp Penalty</th>
+            <td th:text="${record.corpPenalty}"></td>
+        </tr>
+        <tr>
+            <th>Boat Commander</th>
+            <td th:text="${record.boatCommander}"></td>
+        </tr>
+        <tr>
+            <th>Penalty Type</th>
+            <td th:text="${record.penaltyType}"></td>
+        </tr>
+        <tr>
+            <th>Legislative Reference</th>
+            <td th:text="${record.legislativeReference}"></td>
+        </tr>
+    </table>
+    <a href="/records" class="btn btn-primary">Back to List</a>
+    <a th:href="@{/records/edit/{id}(id=${record.id})}" class="btn btn-warning">Edit</a>
+    <a th:href="@{/records/delete/{id}(id=${record.id})}" class="btn btn-danger">Delete</a>
+</div>
+</body>
+</html>
